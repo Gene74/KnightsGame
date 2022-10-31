@@ -5,25 +5,39 @@ namespace KnightsGame
     internal class Board
     {
         /*
-         * Konstanten
+         * Constants
          */
 
+        /// <summary>
+        /// if the board is printed "live", this is the delay between every move.
+        /// </summary>
         private const int DELAY_MS = 200;
 
         /*
-         * Eigenschaften
+         * Properties
          */
 
+        // Width and height of the board
         public int Width { get; private set; } = 8;
         public int Height { get; private set; } = 8;
 
+        /// <summary>
+        /// to collect all the movements with the number of the move in the fields
+        /// </summary>
         public int[,] board;
+
+        /// <summary>
+        /// will count the current moves: addition and subtraction
+        /// </summary>
         public List<Point> moves { get; private set; }
 
+        /// <summary>
+        /// counts all moves that had been made in total
+        /// </summary>
         private long counter = 0;
 
         /*
-         * Konstruktor
+         * Constructor
          */
 
         public Board(int width = 8, int height = 8)
@@ -35,9 +49,14 @@ namespace KnightsGame
         }
 
         /*
-         * Methoden
+         * Methods
          */
 
+        /// <summary>
+        /// Checks if the point p is on the board and if that field is still available
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public bool IsValidMove(Point p)
         {
             return
@@ -46,8 +65,18 @@ namespace KnightsGame
                 board[p.X, p.Y] == 0;
         }
 
+        /// <summary>
+        /// Checks if the board has been completed
+        /// </summary>
+        /// <returns></returns>
         public bool IsComplete() => moves.Count == (Width * Height);
 
+        /// <summary>
+        /// Checks a move if it would be valid and does it or not
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="show">print the board?</param>
+        /// <returns></returns>
         public bool Move(Point p, bool show = false)
         {
             if (!IsValidMove(p)) return false;
@@ -62,6 +91,11 @@ namespace KnightsGame
             return true;
         }
 
+        /// <summary>
+        /// Undo the last move
+        /// </summary>
+        /// <param name="show">print the board?</param>
+        /// <returns></returns>
         public bool Undo(bool show = false)
         {
             if (moves.Count == 0) return false;
@@ -76,6 +110,12 @@ namespace KnightsGame
             return true;
         }
 
+
+        /// <summary>
+        /// Prints the board with all the current moves + total moves up to now.
+        /// </summary>
+        /// <param name="offsetLeft"></param>
+        /// <param name="offsetTop"></param>
         public void PrintBoard(int offsetLeft = 0, int offsetTop = 2)
         {
             const string LINE_A = "+--+--+--+--+--+--+--+--+";

@@ -5,13 +5,16 @@ namespace KnightsGame
     internal class PlayerAI
     {
         /*
-         * Eigenschaften
+         * Properties
          */
 
+        /// <summary>
+        /// Link to the board
+        /// </summary>
         private Board board;
 
         /*
-         * Konstruktor
+         * Constructor
          */
 
         public PlayerAI(Board board)
@@ -20,9 +23,14 @@ namespace KnightsGame
         }
 
         /*
-         * Methoden
+         * Methods
          */
 
+        /// <summary>
+        /// Recursive algorithm
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public bool Run(Point p)
         {
             if (!board.Move(p)) return false;
@@ -53,48 +61,54 @@ namespace KnightsGame
             return true;
         }
 
-        public Point calcNextPosition(Point oldPos, int pos)
+        /// <summary>
+        /// Calculates the next position
+        /// </summary>
+        /// <param name="oldPos"></param>
+        /// <param name="pos"></param>
+        /// <returns></returns>
+        private Point calcNextPosition(Point oldPos, int pos)
         {
             var newPos = new Point(oldPos.X, oldPos.Y);
 
             switch (pos)
             {
-                case 1: // 1uhr
+                case 1: // 1 o'clock
                     newPos.X++;
                     newPos.Y -= 2;
                     break;
 
-                case 2: // 2uhr
+                case 2: // 2 o'clock
                     newPos.X += 2;
                     newPos.Y--;
                     break;
 
-                case 3: // 4uhr
+                case 3: // 4 o'clock
                     newPos.X += 2;
                     newPos.Y++;
                     break;
 
-                case 4: // 5uhr
+                case 4: // 5 o'clock
                     newPos.X++;
                     newPos.Y += 2;
                     break;
 
-                case 5: // 7uhr
+                case 5: // 7 o'clock
                     newPos.X--;
                     newPos.Y += 2;
                     break;
 
-                case 6: // 8uhr
+                case 6: // 8 o'clock
                     newPos.X -= 2;
                     newPos.Y++;
                     break;
 
-                case 7: // 10uhr
+                case 7: // 10 o'clock
                     newPos.X -= 2;
                     newPos.Y--;
                     break;
 
-                case 8: // 11uhr
+                case 8: // 11 o'clock
                     newPos.X--;
                     newPos.Y += 2;
                     break;
